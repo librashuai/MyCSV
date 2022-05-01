@@ -1,0 +1,50 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:clr="clr-namespace:System;assembly=mscorlib"
+        xmlns:vm="using:MyCSV.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dd="clr-namespace:MyCSV.DesignData"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="MyCSV.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="MyCSV">
+
+  <Design.DataContext>
+    <dd:MainWindowDesignData></dd:MainWindowDesignData>
+  </Design.DataContext>
+
+  <DockPanel LastChildFill="True">
+    <Menu DockPanel.Dock="Top">
+      <MenuItem Header="File">
+        <MenuItem Header="Open" Command="{Binding MenuOpen}">
+
+        </MenuItem>
+      </MenuItem>
+      <MenuItem Header="Tool">
+
+      </MenuItem>
+    </Menu>
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="32"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <StackPanel Grid.Row="0" Orientation="Horizontal">
+        <ToggleButton Name="uiTBShowHeader" IsChecked="{Binding ShowHeader}" Background="#ffffff">
+          <Image Source="/Assets/ShowHeader.png"></Image>
+        </ToggleButton>
+        <Button Background="#ffffff">
+          <Image Source="/Assets/FrozenColum.png"></Image>
+        </Button>
+        <Button Background="#ffffff" Click="OnToolbarRowToTabelClick">
+          <Image Source="/Assets/RowToTable.png"></Image>
+        </Button>
+      </StackPanel>
+
+      <DataGrid Name="uiDataGrid" Grid.Row="1" Items="{Binding CsvData}" AutoGenerateColumns="False" CanUserResizeColumns="True" CanUserSortColumns="False">
+
+      </DataGrid>
+    </Grid>
+  </DockPanel>
+</Window>

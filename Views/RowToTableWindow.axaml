@@ -1,0 +1,34 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dd="clr-namespace:MyCSV.DesignData"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="800"
+        Width="600" Height="800"
+        x:Class="MyCSV.Views.RowToTableWindow"
+        Title="RowToTableWindow">
+
+  <Design.DataContext>
+    <dd:RowToTableDesignData></dd:RowToTableDesignData>
+  </Design.DataContext>
+  
+  <ListBox Items="{Binding Row}" SelectedIndex="{Binding SelectedIndex, Mode=OneWayToSource}">
+    <ListBox.ItemTemplate>
+      <DataTemplate>
+        <Border BorderBrush="Black" BorderThickness="1">
+          <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding Header}" FontSize="18" FontStyle="Oblique"></TextBlock>
+            <TextBlock Text="{Binding Description}" FontSize="15"></TextBlock>
+            <TextBlock Text="{Binding Value}"></TextBlock>
+          </StackPanel>
+        </Border>
+      </DataTemplate>
+    </ListBox.ItemTemplate>
+    <ListBox.ContextMenu>
+      <ContextMenu>
+        <MenuItem Header="Copy Header" Command="{Binding CopySelectedHeader}"></MenuItem>
+        <MenuItem Header="Copy Value" Command="{Binding CopySelectedValue}"></MenuItem>
+      </ContextMenu>
+    </ListBox.ContextMenu>
+  </ListBox>
+</Window>
