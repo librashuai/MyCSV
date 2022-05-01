@@ -9,7 +9,6 @@ namespace MyCSV.DesignData
 {
     public class MainWindowDesignData
     {
-        public AvaloniaList<List<string>> CsvData { get; set; }
         public bool ShowHeader { get; set; }
 
     }

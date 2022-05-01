@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Data;
 using Avalonia.Interactivity;
 using MyCSV.ViewModels;
@@ -77,6 +78,11 @@ namespace MyCSV.Views
             };
 
             rowToTableWnd.Show(this);
+        }
+
+        void OnToolbarFrozenColumn(object? sender, RoutedEventArgs e)
+        {
+            uiDataGrid.FrozenColumnCount = (sender as ToggleButton).IsChecked == true?1:0;
         }
     }
 }

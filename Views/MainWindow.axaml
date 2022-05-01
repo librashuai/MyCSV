@@ -34,15 +34,15 @@
         <ToggleButton Name="uiTBShowHeader" IsChecked="{Binding ShowHeader}" Background="#ffffff">
           <Image Source="/Assets/ShowHeader.png"></Image>
         </ToggleButton>
-        <Button Background="#ffffff">
+        <ToggleButton Background="#ffffff" Click="OnToolbarFrozenColumn">
           <Image Source="/Assets/FrozenColum.png"></Image>
-        </Button>
+        </ToggleButton>
         <Button Background="#ffffff" Click="OnToolbarRowToTabelClick">
           <Image Source="/Assets/RowToTable.png"></Image>
         </Button>
       </StackPanel>
 
-      <DataGrid Name="uiDataGrid" Grid.Row="1" Items="{Binding CsvData}" AutoGenerateColumns="False" CanUserResizeColumns="True" CanUserSortColumns="False">
+      <DataGrid Name="uiDataGrid" Grid.Row="1" Items="{Binding CsvData}" AutoGenerateColumns="False" CanUserResizeColumns="True" CanUserSortColumns="False" GridLinesVisibility="All">
 
       </DataGrid>
     </Grid>
