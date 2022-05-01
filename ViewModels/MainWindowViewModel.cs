@@ -4,6 +4,7 @@ using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace MyCSV.ViewModels
 {
@@ -19,6 +20,13 @@ namespace MyCSV.ViewModels
                 App.I.modelCSV.ShowHeader = value;
                 this.RaiseAndSetIfChanged(ref showHeader, value); 
             }
+        }
+
+        private string windowTitle = "MyCSV";
+        public string WindowTitle
+        {
+            get => windowTitle;
+            set => this.RaiseAndSetIfChanged(ref windowTitle, value);
         }
 
 
@@ -37,6 +45,7 @@ namespace MyCSV.ViewModels
             if(filePaths != null && filePaths.Length > 0 && !string.IsNullOrEmpty(filePaths[0]))
             {
                 App.I.modelCSV.LoadCSV(filePaths[0]);
+                WindowTitle = $"MyCSV {Path.GetFileName(filePaths[0])}";
             }
         }
 

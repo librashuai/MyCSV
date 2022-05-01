@@ -69,9 +69,11 @@ namespace MyCSV.Views
 
         void OnToolbarRowToTabelClick(object? sender, RoutedEventArgs e)
         {
+            var row = App.I.modelCSV.RowCellInfo(uiDataGrid.SelectedIndex);
+
             var rowToTableWnd = new RowToTableWindow
             {
-                DataContext = new RowToTableViewModel { Row = App.I.modelCSV.RowCellInfo(uiDataGrid.SelectedIndex)}
+                DataContext = new RowToTableViewModel { Row = row, WindowTitle=$"{row[0].Value}"}
             };
 
             rowToTableWnd.Show(this);

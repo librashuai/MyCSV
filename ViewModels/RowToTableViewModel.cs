@@ -17,6 +17,9 @@ namespace MyCSV.ViewModels
             get;set;
         }
 
+        public string WindowTitle { get; set; }
+
+
 
         void CopySelectedHeader()
         {

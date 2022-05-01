@@ -8,7 +8,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="MyCSV.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="MyCSV">
+        Title="{Binding WindowTitle}">
 
   <Design.DataContext>
     <dd:MainWindowDesignData></dd:MainWindowDesignData>

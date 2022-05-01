@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="800"
         Width="600" Height="800"
         x:Class="MyCSV.Views.RowToTableWindow"
-        Title="RowToTableWindow">
+        Title="{Binding WindowTitle}">
 
   <Design.DataContext>
     <dd:RowToTableDesignData></dd:RowToTableDesignData>
