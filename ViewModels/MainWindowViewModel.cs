@@ -36,6 +36,10 @@ namespace MyCSV.ViewModels
         {
             CsvData = new AvaloniaList<List<string>>();
             App.I.modelCSV.NotifyAddRow += OnAddRow;
+            App.I.modelCSV.NotifyOpenedFile += (e) =>
+            {
+                WindowTitle = $"MyCSV {Path.GetFileName(e)}";
+            };
         }
 
         async void MenuOpen()
@@ -45,7 +49,6 @@ namespace MyCSV.ViewModels
             if(filePaths != null && filePaths.Length > 0 && !string.IsNullOrEmpty(filePaths[0]))
             {
                 App.I.modelCSV.LoadCSV(filePaths[0]);
-                WindowTitle = $"MyCSV {Path.GetFileName(filePaths[0])}";
             }
         }
 

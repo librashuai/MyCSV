@@ -24,6 +24,8 @@ namespace MyCSV.Models
 
         public DNotifyAddRow? NotifyAddRow;
 
+        public Action<string>? NotifyOpenedFile;
+
         public async void LoadCSV(string filePath)
         {
             csvData.Clear();
@@ -37,6 +39,7 @@ namespace MyCSV.Models
 
             using(var file = File.OpenText(filePath))
             {
+                NotifyOpenedFile?.Invoke(filePath);
                 while(true)
                 {
                     var line = await file.ReadLineAsync();

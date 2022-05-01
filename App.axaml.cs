@@ -4,6 +4,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using MyCSV.ViewModels;
 using MyCSV.Views;
+using System.IO;
 
 namespace MyCSV
 {
@@ -34,9 +35,24 @@ namespace MyCSV
                     DataContext = new MainWindowViewModel(),
                 };
                 mainWindow = desktop.MainWindow;
+
+                desktop.Startup += Desktop_Startup;
             }
 
             base.OnFrameworkInitializationCompleted();
+        }
+
+        private void Desktop_Startup(object? sender, ControlledApplicationLifetimeStartupEventArgs e)
+        {
+            var args = e.Args;
+            if(args.Length == 1)
+            {
+                var file = args[0];
+                if(File.Exists(file))
+                {
+                    modelCSV.LoadCSV(file);
+                }
+            }
         }
     }
 }
