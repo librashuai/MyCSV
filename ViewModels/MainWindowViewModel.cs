@@ -30,6 +30,13 @@ namespace MyCSV.ViewModels
         }
 
 
+        private string statusInfo;
+        public string StatusInfo
+        {
+            get => statusInfo;
+            set => this.RaiseAndSetIfChanged(ref statusInfo, value);
+        }
+
         public Action<List<string>>? NotifyAddFirstRow;
 
         public MainWindowViewModel()

@@ -98,7 +98,7 @@ namespace MyCSV.Models
             return csvData[0];
         }
 
-        public CellPosition FindCell(string txt, CellPosition start)
+        public CellPosition FindCell(string txt, CellPosition start, bool includeStart = true, bool reverse = false)
         {
             if (csvData.Count == 0)
                 return null;
@@ -108,13 +108,38 @@ namespace MyCSV.Models
 
             if(start == null)
             {
-                start = new CellPosition();
+                if(reverse)
+                {
+                    start = new CellPosition { Row = csvData.Count - 1, Column = columCount - 1 };
+                }
+                else
+                {
+                    start = new CellPosition();
+                }
+                
             }
 
-            var index = start.Row * columCount + start.Column + 1;
+            var index = start.Row * columCount + start.Column;
+            if(!includeStart)
+            {
+                if (reverse)
+                    index--;
+                else
+                    index++;
+            }
+
 
             while(index < cellCount)
             {
+                if (index < 0)
+                {
+                    index += cellCount;
+                }
+                else if (index >= cellCount)
+                {
+                    index -= cellCount;
+                }
+
                 var row = index / columCount;
                 var column = index % columCount;
 
@@ -127,7 +152,14 @@ namespace MyCSV.Models
                     };
                 }
 
-                index++;
+                if(reverse)
+                {
+                    index--;
+                }
+                else
+                {
+                    index++;
+                }
             }
 
             return null;
