@@ -14,6 +14,12 @@ namespace MyCSV.Models
         public string Value { get; set; }
     }
 
+    public class CellPosition
+    {
+        public int Row { get; set; }
+        public int Column { get; set; }
+    }
+
     public class ModelCSV
     {
         List<List<string>> csvData = new List<List<string>>();
@@ -90,6 +96,41 @@ namespace MyCSV.Models
                 return null;
 
             return csvData[0];
+        }
+
+        public CellPosition FindCell(string txt, CellPosition start)
+        {
+            if (csvData.Count == 0)
+                return null;
+
+            var columCount = csvData[0].Count;
+            var cellCount = csvData.Count * columCount;
+
+            if(start == null)
+            {
+                start = new CellPosition();
+            }
+
+            var index = start.Row * columCount + start.Column + 1;
+
+            while(index < cellCount)
+            {
+                var row = index / columCount;
+                var column = index % columCount;
+
+                if (csvData[row][column].Contains(txt))
+                {
+                    return new CellPosition
+                    {
+                        Row = row,
+                        Column = column
+                    };
+                }
+
+                index++;
+            }
+
+            return null;
         }
     }
 }

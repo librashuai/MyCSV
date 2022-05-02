@@ -26,7 +26,7 @@
 
       </MenuItem>
     </Menu>
-    <v:SearchControl DockPanel.Dock="Bottom" IsVisible="{Binding #uiSearch.IsChecked}"></v:SearchControl>
+    <v:SearchControl Name="uiSearchControl" DockPanel.Dock="Bottom" IsVisible="{Binding #uiSearch.IsChecked}"></v:SearchControl>
     <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="32"/>

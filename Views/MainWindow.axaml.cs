@@ -18,6 +18,8 @@ namespace MyCSV.Views
             this.DataContextChanged += MainWindow_DataContextChanged;
             this.uiTBShowHeader.Checked += UiTBShowHeader_Checked;
             this.uiTBShowHeader.Unchecked += UiTBShowHeader_Unchecked;
+            this.uiSearchControl.DataContext = new SearchControlViewModel();
+            this.uiSearchControl.NotifyFindCell += OnFindCell;
         }
 
         bool IsDesignPreview()
@@ -122,6 +124,26 @@ namespace MyCSV.Views
         void OnToolbarSearch(object? sender, RoutedEventArgs e)
         {
 
+        }
+
+        void OnFindCell(int row, int column)
+        {
+            var index = 0;
+            foreach(var item in uiDataGrid.Items)
+            {
+                if(index++ == row)
+                {
+                    uiDataGrid.ScrollIntoView(item, uiDataGrid.Columns[column]);
+                    uiDataGrid.SelectedIndex = row;
+                    uiDataGrid.CurrentColumn = uiDataGrid.Columns[column];
+                    var cell = uiDataGrid.CurrentColumn.GetCellContent(item) as TextBlock;
+                    var dataGridCell = cell.Parent as DataGridCell;
+                    
+                    dataGridCell.Focus();
+                    uiDataGrid.Focus();
+                    break;
+                }
+            }         
         }
     }
 }

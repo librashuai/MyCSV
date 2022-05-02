@@ -10,15 +10,15 @@
       <ColumnDefinition Width="Auto"></ColumnDefinition>
     </Grid.ColumnDefinitions>
     
-    <TextBox Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,5,0"></TextBox>
+    <TextBox Name="uiSearchText" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,5,0"></TextBox>
     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch" >
-      <Button Width="32" Height="32" Background="#e9e9e9">
+      <Button Width="32" Height="32" Background="#e9e9e9" Command="{Binding SearchFisrt}" CommandParameter="{Binding #uiSearchText.Text}">
         <Image Source="/Assets/ArroToBegine.png"></Image>
       </Button>
       <Button Width="32" Height="32" Background="#e9e9e9">
         <Image Source="/Assets/ArrowForward.png"></Image>
       </Button>
-      <Button Width="32" Height="32" Background="#e9e9e9">
+      <Button Width="32" Height="32" Background="#e9e9e9" Command="{Binding Search}" CommandParameter="{Binding #uiSearchText.Text}">
         <Image Source="/Assets/ArrowNext.png" Height="32"></Image>
       </Button>
       <Button Width="32" Height="32" Background="#e9e9e9">
