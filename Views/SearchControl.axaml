@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="40"
+             x:Class="MyCSV.Views.SearchControl">
+  <Grid Margin="3" Background="#c8c8c8">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"></ColumnDefinition>
+      <ColumnDefinition Width="Auto"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+    
+    <TextBox Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,5,0"></TextBox>
+    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch" >
+      <Button Width="32" Height="32" Background="#e9e9e9">
+        <Image Source="/Assets/ArroToBegine.png"></Image>
+      </Button>
+      <Button Width="32" Height="32" Background="#e9e9e9">
+        <Image Source="/Assets/ArrowForward.png"></Image>
+      </Button>
+      <Button Width="32" Height="32" Background="#e9e9e9">
+        <Image Source="/Assets/ArrowNext.png" Height="32"></Image>
+      </Button>
+      <Button Width="32" Height="32" Background="#e9e9e9">
+        <Image Source="/Assets/ArroToEnd.png"></Image>
+      </Button>
+    </StackPanel>
+  </Grid>
+
+</UserControl>

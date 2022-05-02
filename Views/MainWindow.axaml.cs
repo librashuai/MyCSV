@@ -20,6 +20,11 @@ namespace MyCSV.Views
             this.uiTBShowHeader.Unchecked += UiTBShowHeader_Unchecked;
         }
 
+        bool IsDesignPreview()
+        {
+            return this.DataContext is DesignData.MainWindowDesignData;
+        }
+
         private void UiTBShowHeader_Unchecked(object? sender, RoutedEventArgs e)
         {
             uiDataGrid.HeadersVisibility = DataGridHeadersVisibility.None;
@@ -40,9 +45,21 @@ namespace MyCSV.Views
 
         private void MainWindow_DataContextChanged(object? sender, EventArgs e)
         {
+            if (IsDesignPreview())
+            {
+                uiDataGrid.HeadersVisibility = DataGridHeadersVisibility.All;
+
+                AddDataGridColum(0, "Name");
+                AddDataGridColum(1, "Age");
+                AddDataGridColum(2, "Gender");
+                AddDataGridColum(3, "Phone");
+                return;
+            }
+
             viewModel = DataContext as MainWindowViewModel;
             if (viewModel == null)
                 return;
+
             viewModel.NotifyAddFirstRow += OnAddFirstRow;
         }
 
@@ -70,6 +87,9 @@ namespace MyCSV.Views
 
         void OnToolbarRowToTabelClick(object? sender, RoutedEventArgs e)
         {
+            if (IsDesignPreview())
+                return;
+
             var row = App.I.modelCSV.RowCellInfo(uiDataGrid.SelectedIndex);
 
             var rowToTableWnd = new RowToTableWindow
@@ -83,6 +103,25 @@ namespace MyCSV.Views
         void OnToolbarFrozenColumn(object? sender, RoutedEventArgs e)
         {
             uiDataGrid.FrozenColumnCount = (sender as ToggleButton).IsChecked == true?1:0;
+        }
+
+        void OnToolbarFrozenColumnIncrease(object? sender, RoutedEventArgs e)
+        {
+            if (uiDataGrid.FrozenColumnCount == uiDataGrid.Columns.Count)
+                return;
+            uiDataGrid.FrozenColumnCount += 1;
+        }
+
+        void OnToolbarFrozenColumnDecrease(object? sender, RoutedEventArgs e)
+        {
+            if (uiDataGrid.FrozenColumnCount == 1)
+                return;
+            uiDataGrid.FrozenColumnCount -= 1;
+        }
+
+        void OnToolbarSearch(object? sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

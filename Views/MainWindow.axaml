@@ -2,12 +2,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:clr="clr-namespace:System;assembly=mscorlib"
         xmlns:vm="using:MyCSV.ViewModels"
+        xmlns:v="using:MyCSV.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:dd="clr-namespace:MyCSV.DesignData"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="MyCSV.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/logo.ico"
         Title="{Binding WindowTitle}">
 
   <Design.DataContext>
@@ -25,6 +26,7 @@
 
       </MenuItem>
     </Menu>
+    <v:SearchControl DockPanel.Dock="Bottom" IsVisible="{Binding #uiSearch.IsChecked}"></v:SearchControl>
     <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="32"/>
@@ -34,12 +36,24 @@
         <ToggleButton Name="uiTBShowHeader" IsChecked="{Binding ShowHeader}" Background="#ffffff">
           <Image Source="/Assets/ShowHeader.png"></Image>
         </ToggleButton>
-        <ToggleButton Background="#ffffff" Click="OnToolbarFrozenColumn">
+        <ToggleButton Name="uiTBFrozenColumn" Background="#ffffff" Click="OnToolbarFrozenColumn">
           <Image Source="/Assets/FrozenColum.png"></Image>
         </ToggleButton>
+        <StackPanel Orientation="Vertical" IsVisible="{Binding #uiTBFrozenColumn.IsChecked}">
+          <Button Height="11" Click="OnToolbarFrozenColumnIncrease">
+            <Image Source="/Assets/ArrowUp.png" Height="10" Width="10"></Image>
+          </Button>
+          <TextBlock Height="10" FontSize="9" Text="{Binding #uiDataGrid.FrozenColumnCount}" HorizontalAlignment="Center"></TextBlock>
+          <Button Height="11" Click="OnToolbarFrozenColumnDecrease">
+            <Image Source="/Assets/ArrowDown.png" Height="10" Width="10"></Image>
+          </Button>
+        </StackPanel>
         <Button Background="#ffffff" Click="OnToolbarRowToTabelClick">
           <Image Source="/Assets/RowToTable.png"></Image>
         </Button>
+        <ToggleButton Name="uiSearch" Background="#ffffff">
+          <Image Source="/Assets/Search.png"></Image>
+        </ToggleButton>
       </StackPanel>
 
       <DataGrid Name="uiDataGrid" Grid.Row="1" Items="{Binding CsvData}" AutoGenerateColumns="False" CanUserResizeColumns="True" CanUserSortColumns="False" GridLinesVisibility="All">
