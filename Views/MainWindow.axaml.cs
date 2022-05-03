@@ -16,10 +16,40 @@ namespace MyCSV.Views
             InitializeComponent();
 
             this.DataContextChanged += MainWindow_DataContextChanged;
+        }
+
+        private void MainWindow_DataContextChanged(object? sender, EventArgs e)
+        {
+            if (IsDesignPreview())
+            {
+                uiDataGrid.HeadersVisibility = DataGridHeadersVisibility.All;
+
+                AddDataGridColum(0, "Name");
+                AddDataGridColum(1, "Age");
+                AddDataGridColum(2, "Gender");
+                AddDataGridColum(3, "Phone");
+                return;
+            }
+
+            viewModel = DataContext as MainWindowViewModel;
+            if (viewModel == null)
+                return;
+
+            viewModel.NotifyAddFirstRow += OnAddFirstRow;
+            
             this.uiTBShowHeader.Checked += UiTBShowHeader_Checked;
             this.uiTBShowHeader.Unchecked += UiTBShowHeader_Unchecked;
-            this.uiSearchControl.DataContext = new SearchControlViewModel();
+
+            this.uiDataGrid.SelectionChanged += UiDataGrid_SelectionChanged;
+
+            this.uiSearchControl.DataContext = viewModel.SearchControlVM;
             this.uiSearchControl.NotifyFindCell += OnFindCell;
+            
+        }
+
+        private void UiDataGrid_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+        {
+            viewModel.SelectedRow = this.uiDataGrid.SelectedIndex;
         }
 
         bool IsDesignPreview()
@@ -45,25 +75,7 @@ namespace MyCSV.Views
             }
         }
 
-        private void MainWindow_DataContextChanged(object? sender, EventArgs e)
-        {
-            if (IsDesignPreview())
-            {
-                uiDataGrid.HeadersVisibility = DataGridHeadersVisibility.All;
 
-                AddDataGridColum(0, "Name");
-                AddDataGridColum(1, "Age");
-                AddDataGridColum(2, "Gender");
-                AddDataGridColum(3, "Phone");
-                return;
-            }
-
-            viewModel = DataContext as MainWindowViewModel;
-            if (viewModel == null)
-                return;
-
-            viewModel.NotifyAddFirstRow += OnAddFirstRow;
-        }
 
         public void AddDataGridColum(int index, string header)
         {

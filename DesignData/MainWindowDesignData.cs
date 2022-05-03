@@ -18,6 +18,7 @@ namespace MyCSV.DesignData
         };
         public bool ShowHeader { get; set; }
 
+        public string StatusLine => "Row 10";
         public string StatusInfo => "This is status information.";
     }
 }

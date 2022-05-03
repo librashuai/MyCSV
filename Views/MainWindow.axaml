@@ -55,12 +55,12 @@
 
     <Grid DockPanel.Dock="Bottom" Background="#c8c8c8" Height="24">
       <StackPanel Orientation="Horizontal" Margin="2" Spacing="4">
-        <TextBlock VerticalAlignment="Center" Padding="4,0,4,0">Ln , Col</TextBlock>
+        <TextBlock VerticalAlignment="Center" Text="{Binding StatusLine}" Padding="4,0,4,0"></TextBlock>
         <Border BorderBrush="#b0b0b0" BorderThickness="1" Height="24"></Border>
         <TextBlock Text="{Binding StatusInfo}" VerticalAlignment="Center" Padding="4,0,4,0"></TextBlock>
       </StackPanel>
     </Grid>
-    <v:SearchControl Name="uiSearchControl" DockPanel.Dock="Bottom" IsVisible="{Binding #uiSearch.IsChecked}"></v:SearchControl>
+    <v:SearchControl Name="uiSearchControl" DockPanel.Dock="Bottom" IsVisible="{Binding #uiSearch.IsChecked}" ></v:SearchControl>
 
     <Grid>
       <Grid.RowDefinitions>

@@ -7,13 +7,19 @@ using MyCSV.Models;
 
 namespace MyCSV.ViewModels
 {
-    internal class SearchControlViewModel:ViewModelBase
+    public class SearchControlViewModel:ViewModelBase
     {
+        MainWindowViewModel mainWindowVM;
 
         CellPosition StartCell { get; set; }
 
 
         public Action<CellPosition>? NotifyFindCell;
+
+        public SearchControlViewModel(MainWindowViewModel mainWindowVM)
+        {
+            this.mainWindowVM = mainWindowVM;
+        }
 
         void Search(string text)
         {
@@ -23,6 +29,11 @@ namespace MyCSV.ViewModels
             {
                 StartCell = cell;
                 NotifyFindCell?.Invoke(cell);
+                mainWindowVM.StatusInfo = $"Find: {text}";
+            }
+            else
+            {
+                mainWindowVM.StatusInfo = $"Can't find: {text}";
             }
         }
 
@@ -34,6 +45,11 @@ namespace MyCSV.ViewModels
             {
                 StartCell = cell;
                 NotifyFindCell?.Invoke(cell);
+                mainWindowVM.StatusInfo = $"Find: {text}";
+            }
+            else
+            {
+                mainWindowVM.StatusInfo = $"Can't find: {text}";
             }
         }
 
@@ -44,6 +60,11 @@ namespace MyCSV.ViewModels
             {
                 StartCell = cell;
                 NotifyFindCell?.Invoke(cell);
+                mainWindowVM.StatusInfo = $"Find: {text}";
+            }
+            else
+            {
+                mainWindowVM.StatusInfo = $"Can't find: {text}";
             }
         }
 
@@ -54,6 +75,11 @@ namespace MyCSV.ViewModels
             {
                 StartCell = cell;
                 NotifyFindCell?.Invoke(cell);
+                mainWindowVM.StatusInfo = $"Find: {text}";
+            }
+            else
+            {
+                mainWindowVM.StatusInfo = $"Can't find: {text}";
             }
         }
     }

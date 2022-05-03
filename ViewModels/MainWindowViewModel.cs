@@ -12,6 +12,8 @@ namespace MyCSV.ViewModels
     {
         public AvaloniaList<List<string>> CsvData { get; set; }
 
+        public SearchControlViewModel SearchControlVM => new SearchControlViewModel(this);
+
         private bool showHeader;
         public bool ShowHeader
         {
@@ -29,6 +31,22 @@ namespace MyCSV.ViewModels
             set => this.RaiseAndSetIfChanged(ref windowTitle, value);
         }
 
+        private int selectedRow;
+        public int SelectedRow
+        {
+            get => selectedRow;
+            set { 
+                this.RaiseAndSetIfChanged(ref selectedRow, value); 
+                StatusLine = $"Row {value}"; 
+            }
+        }
+
+        private string statusLine;
+        public string StatusLine
+        {
+            get => statusLine;
+            set => this.RaiseAndSetIfChanged(ref statusLine, value);
+        }
 
         private string statusInfo;
         public string StatusInfo

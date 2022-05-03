@@ -26,6 +26,7 @@ namespace MyCSV.Views
             this.DataContextChanged += SearchControl_DataContextChanged;
         }
 
+
         private void SearchControl_DataContextChanged(object? sender, System.EventArgs e)
         {
             viewModel = this.DataContext as SearchControlViewModel;
